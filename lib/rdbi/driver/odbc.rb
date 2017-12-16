@@ -38,6 +38,7 @@ class RDBI::Driver::ODBC < RDBI::Driver
      -6 => {:type => "TINYINT",        :ruby_type => :integer},
      -7 => {:type => "BIT",            :ruby_type => :default},
      -8 => {:type => "CHAR",           :ruby_type => :default},
+     -9 => {:type => "UNIQUEIDENTIFIER", :ruby_type => :default},
     -10 => {:type => "BLOB",           :ruby_type => :default},
     -11 => {:type => "CLOB",           :ruby_type => :default},
   }
@@ -74,7 +75,7 @@ class RDBI::Driver::ODBC < RDBI::Driver
       @handle.rollback
       super
     end
-      
+
     def commit
       @handle.commit
       super
@@ -206,7 +207,7 @@ class RDBI::Driver::ODBC < RDBI::Driver
       @handle          = @dbh.handle.prepare(query)
       @input_type_map  = build_input_type_map
       @output_type_map = build_output_type_map
-     
+
     end
 
     def new_execution(*binds)
